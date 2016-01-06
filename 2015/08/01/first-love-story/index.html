@@ -4,24 +4,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>android点击两次退出应用 | yoyo</title>
+  <title>写给她的第一封信 | yoyo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
+  <meta name="description" content="坐在去上海的火车上，天气依旧是雨，无聊地看着窗外飞过的风景和身旁回上海的情侣，心绪就像后退的街景往后追溯～～然后拿着手机，忽然想写点文字了，只因为明天——它于现在的我而言，有特殊的意义！王家卫曾这样描述爱情：那一刻，我很暖！回想四个月前，我赞同了王先生的话，两个人打着电话傻傻地笑着，两个熟悉的人却羞赧地面对面吃饭，还一起坐在还有些微凉的亭子里抱着彼此，但浑然不觉得冷～～那不是我刻意设计的桥段，虽然">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android点击两次退出应用">
-<meta property="og:url" content="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/index.html">
+<meta property="og:title" content="写给她的第一封信">
+<meta property="og:url" content="http://yoursite.com/2015/08/01/first-love-story/index.html">
 <meta property="og:site_name" content="yoyo">
-<meta property="og:description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
-<meta property="og:updated_time" content="2016-01-06T09:01:04.000Z">
+<meta property="og:description" content="坐在去上海的火车上，天气依旧是雨，无聊地看着窗外飞过的风景和身旁回上海的情侣，心绪就像后退的街景往后追溯～～然后拿着手机，忽然想写点文字了，只因为明天——它于现在的我而言，有特殊的意义！王家卫曾这样描述爱情：那一刻，我很暖！回想四个月前，我赞同了王先生的话，两个人打着电话傻傻地笑着，两个熟悉的人却羞赧地面对面吃饭，还一起坐在还有些微凉的亭子里抱着彼此，但浑然不觉得冷～～那不是我刻意设计的桥段，虽然">
+<meta property="og:updated_time" content="2016-01-06T09:07:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android点击两次退出应用">
-<meta name="twitter:description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
+<meta name="twitter:title" content="写给她的第一封信">
+<meta name="twitter:description" content="坐在去上海的火车上，天气依旧是雨，无聊地看着窗外飞过的风景和身旁回上海的情侣，心绪就像后退的街景往后追溯～～然后拿着手机，忽然想写点文字了，只因为明天——它于现在的我而言，有特殊的意义！王家卫曾这样描述爱情：那一刻，我很暖！回想四个月前，我赞同了王先生的话，两个人打着电话傻傻地笑着，两个熟悉的人却羞赧地面对面吃饭，还一起坐在还有些微凉的亭子里抱着彼此，但浑然不觉得冷～～那不是我刻意设计的桥段，虽然">
   
     <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
   
@@ -78,10 +72,10 @@ private Time">
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Android-TwiceClick-Quit-0" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-first-love-story" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" class="article-date">
-  <time datetime="2015-12-10T10:04:14.000Z" itemprop="datePublished">2015-12-10</time>
+    <a href="/2015/08/01/first-love-story/" class="article-date">
+  <time datetime="2015-08-01T09:02:26.000Z" itemprop="datePublished">2015-08-01</time>
 </a>
     
   </div>
@@ -92,7 +86,7 @@ private Time">
         
   
     <h1 class="article-title" itemprop="name">
-      android点击两次退出应用
+      写给她的第一封信
     </h1>
   
 
@@ -100,43 +94,17 @@ private Time">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。</p>
-<pre><code>private static Boolean isQuit = false; 
-private Timer timer = new Timer();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!isQuit) {
-                isQuit = true;
-                Toast.makeText(getBaseContext(),
-                        R.string.back_more_quit,Toast.LENGTH_LONG).show();
-                TimerTask task = null;
-                task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        isQuit = false;
-                    }
-                };
-                timer.schedule(task, 2000);//其中task
-            } else {
-                finish();//结束当前Activity
-                System.exit(0);//退出应用
-            }
-        }
-        return false;
- }
-</code></pre><p>   当然Timer以及ScheduledExecutorService的应用绝不仅限单次定时任务，还能实现不间断重复任务，比如常见的banner轮播就可以用这两种方式来实现，感兴趣可以研究研究。</p>
+        <p>坐在去上海的火车上，天气依旧是雨，无聊地看着窗外飞过的风景和身旁回上海的情侣，心绪就像后退的街景往后追溯～～<br>然后拿着手机，忽然想写点文字了，只因为明天——它于现在的我而言，有特殊的意义！<br>王家卫曾这样描述爱情：那一刻，我很暖！回想四个月前，我赞同了王先生的话，两个人打着电话傻傻地笑着，两个熟悉的人却羞赧地面对面吃饭，还一起坐在还有些微凉的亭子里抱着彼此，但浑然不觉得冷～～<br>那不是我刻意设计的桥段，虽然在我内心深处，我相信它后面一定会发生，只是没想它的发生带给人的竟然是那般温暖和幸福的感觉。<br>晚上躺在床上，还傻傻地甚至有点质疑地问自己：我又恋爱了？又是和从班上的同学？妈蛋，我是不是太不厚道。。。。。。<br>是的，我又恋爱了，我怀着一颗激动而又忐忑的心去确认了n次这个事实。然而事实也反过来诉我：孩子，别激动，也别害怕，过去已经过去，还有未来！一个如此美好的姑娘，一个如此美好的生活开端，接下来你将如何延续这段美好？<br>  我承认我小白了，那一刻似乎百试不爽的工科逻辑、运算思维和丰富想象都歇菜了。我该怎样正确地以一个男朋友的身份去对待一个姑娘：逗她开心？陪她逛街？了解她的爱好？======<br>       这种小白很快反应在生活中了：过分的关心，让你感觉不自由，不太懂你的喜怒哀乐，说话不经过大脑，总是沉默不说令媳妇儿心情更糟。。。。。。<br>      但是生活就是这样宽容，总有个人会容许你犯错，可是不是人人都可以像爱迪生一样犯1000次错误然后才屁颠屁颠弄出个灯泡儿来。于是，慢慢的我平静了，我慢慢适应了这种生活和这种身份：<br>       不再过于激动半夜凌晨三、四点醒来不能入睡；<br>       不再过于担心你每天的吃喝拉撒我有没有服务到位；<br>       不再过于紧张你的忧伤和疲惫。。。。。。<br>       我知道，你需要的是一个依靠和肩膀，需要一个可以跟你share喜悦和哇靠，需要一个可以陪你去看医生照顾你身体，需要一个可以懂你的余氏心思，需要一个可以让你觉得生活很nice的人，我想我已经在慢慢做到，并将最终能做到！<br>       这四个月，或许有别离，或许有郁闷，或许有伤痛（附：嘿嘿。。曾经晚上从学校去赶地铁，跑的过于风骚，摔马路牙子上了），但是最后我忽然想用一个貌似幽默却又跟前面不搭的话来结束这段文字——赵本山小品《白云黑土》中黑土很羞涩却很顺溜的跟白云说：别怕，有老头呢！<br>      胡乱写在2014.8.1，去上海的火车上，很平凡的一天，七夕节的前一天，四个月纪念的前六天，但于我和末末余，每一天都是重要和快乐的一天，不管身在何时何方！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/" data-id="cij2n16mk00007icsvqyr5cet" class="article-share-link" data-share="baidu" data-title="android点击两次退出应用">分享到</a>
+        <a data-url="http://yoursite.com/2015/08/01/first-love-story/" data-id="cij2n16mw00027ics77x8vi6h" class="article-share-link" data-share="baidu" data-title="写给她的第一封信">分享到</a>
       
 
       
-        <a href="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://yoursite.com/2015/08/01/first-love-story/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -146,20 +114,15 @@ private Timer timer = new Timer();
     
 <nav id="article-nav">
   
-    <a href="/2016/01/06/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">
         
-          Hexo 教程
+          android点击两次退出应用
         
       </div>
     </a>
   
-  
-    <a href="/2015/08/01/first-love-story/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">写给她的第一封信</div>
-    </a>
   
 </nav>
 
@@ -168,7 +131,7 @@ private Timer timer = new Timer();
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2015/12/10/Android-TwiceClick-Quit-0/" data-title="android点击两次退出应用" data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/08/01/first-love-story/" data-title="写给她的第一封信" data-url="http://yoursite.com/2015/08/01/first-love-story/"></div>
   </section>
 
 </section>

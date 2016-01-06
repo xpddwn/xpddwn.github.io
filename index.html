@@ -73,6 +73,158 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-Linux-lab1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/06/Linux-lab1/" class="article-date">
+  <time datetime="2016-01-06T11:47:16.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@(学习资料)[OS, shell 命令,C 语言,GCC编译]</p>
+<blockquote>
+<p>认识Linux</p>
+<ul>
+<li>岳友（yoyo9170@163.com）</li>
+</ul>
+</blockquote>
+<h3 id="u5173_u4E8ELinux_u7684_u5386_u53F2"><a href="#u5173_u4E8ELinux_u7684_u5386_u53F2" class="headerlink" title="关于Linux的历史"></a>关于Linux的历史</h3><p>也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 Linux。当时 Linus 把开发的这个系统内核丢到网上提供大家下载,由于 它的精致小巧,越来越多的爱好者去研究它。人们对这个内核添枝加叶,而后成为了一个系统。 也许你听说过吧,Linux 是免费的。其实这里的免费只是说 Linux 的内核免费。在 Linux 内核的 基础上而产生了众多 Linux 的版本。<br>Linux 的发行版说简单点就是将 Linux 内核与应用软件做一个打包。较知名的发行版有: Ubuntu、RedHat、CentOS、Debain、Fedora、SuSE、OpenSUSE、TurboLinux、 BluePoint、RedFlag、Xterm、SlackWare 等。<br>而常用的就是 Redhat 和CentOS,这里有必要说一下,其实 CentOS 是基于 Redhat 的, 网上有人说,Centos 是 Redhat 企业版的克隆。CentOS 较之于 Redhat 可以免费使用 yum 下载安装所需要的软件包,这个是相当方便的。而 Redhat 要想使用 yum 必须要购买服务了。</p>
+<h3 id="u56FE_u5F62_u754C_u9762_u8FD8_u662F_u547D_u4EE4_u7A97_u53E3"><a href="#u56FE_u5F62_u754C_u9762_u8FD8_u662F_u547D_u4EE4_u7A97_u53E3" class="headerlink" title="图形界面还是命令窗口"></a>图形界面还是命令窗口</h3><p>对于 linux 的应用,我想大多数都是用在服务器领域,对于服务器来讲真的没有必要跑一个图形界 面。所以我们平时安装 linux 操作系统时往往是不安装图形界面的。说到这里也许你会有疑问,图 形界面还能选择装或者不装?<br>是的,虽然 linux 和微软的 windows 一样同位操作系统,但是它们有一个很大的区别就是 windows 操作系统的图形界面是和内核一体的,俗称微内核,而 linux 操作系统图形界面就像一个软件一样, 和内核并不是一体的。所以 linux 你可以选择不安装图形界面,这样不仅不影响服务器的正常使用 还可以节省系统资源的开销,何乐而不为呢?<br>如果你对 linux 超级感兴趣,想使用 linux 就像使用 windows 一样,那你可以安装图形界面,可以像 windows 一样来体验 linux 也是蛮不错的。但是如果你想成为一个专业的 linux系统工程师,那我建 议你从第一天开始就不要去安装图形界面,从命令窗口开始熟悉它。<br>另外一点值得说的是,日常应用中,我们都是远程管理服务器的,不可能开着图形界面来让你去操作, 虽然目前也有相应的工具支持远程图形连接服务器,可是那样太消耗网络带宽资源,所以从这方面 来考虑还是建议你不要使用图形界面。</p>
+<h3 id="Linux_u57FA_u7840_u64CD_u4F5C_u547D_u4EE4"><a href="#Linux_u57FA_u7840_u64CD_u4F5C_u547D_u4EE4" class="headerlink" title="Linux基础操作命令"></a>Linux基础操作命令</h3><p><strong>强烈建议大家可以去阅读<code>《鸟哥的私房菜》</code>，这是对于Linux初学者来说就是圣典。</strong></p>
+<h4 id="1_u3001_u67E5_u770B_u767B_u5F55_u7528_u6237"><a href="#1_u3001_u67E5_u770B_u767B_u5F55_u7528_u6237" class="headerlink" title="1、查看登录用户"></a>1、查看登录用户</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who</span><br><span class="line"><span class="variable">$ </span>who am i</span><br></pre></td></tr></table></figure>
+<h4 id="2_u3001_u67E5_u770B_u865A_u62DF_u63A7_u5236_u53F0_uFF08_u7EC8_u7AEF_uFF09_u5F53_u524D_u76EE_u5F55"><a href="#2_u3001_u67E5_u770B_u865A_u62DF_u63A7_u5236_u53F0_uFF08_u7EC8_u7AEF_uFF09_u5F53_u524D_u76EE_u5F55" class="headerlink" title="2、查看虚拟控制台（终端）当前目录"></a>2、查看虚拟控制台（终端）当前目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+<h4 id="3_u3001_u67E5_u770B_u8054_u673A_uFF08_u5E2E_u52A9_uFF09_u624B_u518C"><a href="#3_u3001_u67E5_u770B_u8054_u673A_uFF08_u5E2E_u52A9_uFF09_u624B_u518C" class="headerlink" title="3、查看联机（帮助）手册"></a>3、查看联机（帮助）手册</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">man</span> <span class="keyword">cd</span>   #查看 <span class="keyword">cd</span> 命令的帮助文档（按 HJKL 移动光标，按 Q 退出）</span><br></pre></td></tr></table></figure>
+<h4 id="4_u3001_u67E5_u770B_u5F53_u524D_u5DE5_u4F5C_u76EE_u5F55_u4E0B_u7684_u6587_u4EF6"><a href="#4_u3001_u67E5_u770B_u5F53_u524D_u5DE5_u4F5C_u76EE_u5F55_u4E0B_u7684_u6587_u4EF6" class="headerlink" title="4、查看当前工作目录下的文件"></a>4、查看当前工作目录下的文件</h4><ul>
+<li><p><strong>常见用法</strong> </p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buaasoft<span class="constant">@buaasoft_virtual_machine</span>:/var$ ls</span><br><span class="line">backups  cache  crash  games  lib  <span class="keyword">local</span>  lock  <span class="built_in">log</span>  mail  <span class="built_in">opt</span>  <span class="built_in">run</span>  spool  tmp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看全部文件</strong></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buaasoft<span class="constant">@buaasoft_virtual_machine</span>:/var$ ls -a</span><br><span class="line">.  ..  backups  cache  crash  games  lib  <span class="keyword">local</span>  lock  <span class="built_in">log</span>  mail  <span class="built_in">opt</span>  <span class="built_in">run</span>  spool  tmp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看详细信息</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">buaasoft@buaasoft_virtual_machine:/var$ ls -l</span><br><span class="line">total <span class="number">44</span></span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">48</span> backups</span><br><span class="line">drwxr-xr-x <span class="number">17</span> root root     <span class="number">4096</span> Oct <span class="number">13</span> <span class="number">20</span>:<span class="number">40</span> cache</span><br><span class="line">drwxrwsrwt  <span class="number">2</span> root whoopsie <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">44</span> crash</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> games</span><br><span class="line">drwxr-xr-x <span class="number">61</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> lib</span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root staff    <span class="number">4096</span> Jan <span class="number">27</span>  <span class="number">2012</span> local</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">9</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> lock -&gt; /run/lock</span><br><span class="line">drwxr-xr-x <span class="number">18</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> <span class="built_in">log</span></span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root mail     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> mail</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> opt</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">4</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> run -&gt; /run</span><br><span class="line">drwxr-xr-x  <span class="number">8</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> spool</span><br><span class="line">drwxrwxrwt  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">15</span> <span class="number">20</span>:<span class="number">13</span> tmp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看隐藏文件</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">buaasoft@buaasoft_virtual_machine:/var$ ls -la <span class="preprocessor">#或者 ls -al, ls -l -a</span></span><br><span class="line">total <span class="number">52</span></span><br><span class="line">drwxr-xr-x <span class="number">13</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> .</span><br><span class="line">drwxr-xr-x <span class="number">23</span> root root     <span class="number">4096</span> Aug  <span class="number">4</span> <span class="number">00</span>:<span class="number">20</span> ..</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">48</span> backups</span><br><span class="line">drwxr-xr-x <span class="number">17</span> root root     <span class="number">4096</span> Oct <span class="number">13</span> <span class="number">20</span>:<span class="number">40</span> cache</span><br><span class="line">drwxrwsrwt  <span class="number">2</span> root whoopsie <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">44</span> crash</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> games</span><br><span class="line">drwxr-xr-x <span class="number">61</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> lib</span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root staff    <span class="number">4096</span> Jan <span class="number">27</span>  <span class="number">2012</span> local</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">9</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> lock -&gt; /run/lock</span><br><span class="line">drwxr-xr-x <span class="number">18</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> <span class="built_in">log</span></span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root mail     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> mail</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> opt</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">4</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> run -&gt; /run</span><br><span class="line">drwxr-xr-x  <span class="number">8</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> spool</span><br><span class="line">drwxrwxrwt  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">15</span> <span class="number">20</span>:<span class="number">13</span> tmp</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在 Ubuntu 上,还可以使用<code>ll</code>和 <code>la</code>。</p>
+<h4 id="5_u3001_u5207_u6362_u5DE5_u4F5C_u76EE_u5F55"><a href="#5_u3001_u5207_u6362_u5DE5_u4F5C_u76EE_u5F55" class="headerlink" title="5、切换工作目录"></a>5、切换工作目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr	<span class="comment"># 进入绝对路径 '／usr'</span></span><br><span class="line">$ <span class="built_in">cd</span> ..		<span class="comment"># 返回上一层目录</span></span><br><span class="line">$ <span class="built_in">cd</span> -		<span class="comment"># 回到刚才目录</span></span><br><span class="line">$ <span class="built_in">cd</span> /		<span class="comment"># 进入根目录</span></span><br><span class="line">$ <span class="built_in">cd</span> ~	 	<span class="comment"># 进入用户目录</span></span><br></pre></td></tr></table></figure>
+<h4 id="6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="6、创建目录和文件"></a>6、创建目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">mkdir</span> <span class="keyword">lab</span>		# 在当前目录下创建 <span class="keyword">lab</span> 目录</span><br><span class="line">$ <span class="keyword">mkdir</span> -p <span class="keyword">lab</span>/<span class="keyword">report</span> 	# 在当前目录下创建 <span class="keyword">lab</span> ，并在 <span class="keyword">lab</span> 下创建 <span class="keyword">report</span></span><br><span class="line">$ touch hello.c 	# 创建一个名为 hello.c 的空文件</span><br></pre></td></tr></table></figure>
+<h4 id="7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="7、删除目录和文件"></a>7、删除目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">rm</span> hello.c 	# 删除文件hello.c</span><br><span class="line">$ <span class="keyword">rmdir</span> <span class="keyword">lab</span>	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -r <span class="keyword">lab</span> 	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -rf <span class="keyword">lab</span> 	# 删除目录<span class="keyword">lab</span>（可以非空）</span><br></pre></td></tr></table></figure>
+<h4 id="8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6"><a href="#8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6" class="headerlink" title="8、复制和移动文件"></a>8、复制和移动文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">cp</span> <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 复制到 target （保留原文件）</span><br><span class="line">$ mv <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 移动到 target （不保留原文件）</span><br></pre></td></tr></table></figure>
+<h3 id="Linux_C_u7F16_u7A0B_u57FA_u7840"><a href="#Linux_C_u7F16_u7A0B_u57FA_u7840" class="headerlink" title="Linux C编程基础"></a>Linux C编程基础</h3><h4 id="1_u3001GCC_u7684_u4F7F_u7528"><a href="#1_u3001GCC_u7684_u4F7F_u7528" class="headerlink" title="1、GCC的使用"></a>1、GCC的使用</h4><ul>
+<li>用 <code>vim</code> 编写<code>hello.c</code>源文件<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[], <span class="keyword">char</span> *env[])</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,<span class="string">"hello,world!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>思考一下main函数第三个参数的作用！</p>
+</blockquote>
+<ul>
+<li>使用GCC编译源代码<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gcc -<span class="constant">E</span> hello.c -o hello.i 	<span class="comment"># 预处理，生成hello.i</span></span><br><span class="line"><span class="variable">$ </span>gcc -<span class="constant">S</span> hello.c -o hello.s 	<span class="comment"># 编译，生成汇编文件 hello.s</span></span><br><span class="line"><span class="variable">$ </span>gcc -c hello.c -o hello.o	<span class="comment"># 编译，生成目标代码 hello.o</span></span><br><span class="line"><span class="variable">$ </span>gcc hello.o -o hello 		<span class="comment"># 链接，生成可执行文件 hello</span></span><br><span class="line"><span class="variable">$ </span>./hello 						<span class="comment"># 执行 hello</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>当然上面是为了让大家了解C代码是如何被编译、链接并最终执行的过程，其中每一步过程对于开发者来说都是透明的，如果熟悉了这一系列的步骤，可以采取<code>gcc hello.c -o hello</code> 一步生成可执行文件。</p>
+</blockquote>
+<h4 id="2_u3001GCC_u7F16_u8BD1_u591A_u6E90_u7801_u6587_u4EF6_u7684_u5DE5_u7A0B"><a href="#2_u3001GCC_u7F16_u8BD1_u591A_u6E90_u7801_u6587_u4EF6_u7684_u5DE5_u7A0B" class="headerlink" title="2、GCC编译多源码文件的工程"></a>2、GCC编译多源码文件的工程</h4><p><code>myprintf.h</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">ifndef</span> MYPRINTF_H</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MYPRINTF_H</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myprintf</span><span class="params">(<span class="keyword">char</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p><code>myprintf.c</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"myprintf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myprintf</span><span class="params">(<span class="keyword">char</span> *s)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"myprintf: %s.\n"</span>,s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>main.c</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"myprintf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	myprintf(<span class="string">"hello,world!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>思考一下<code>ifndef</code>、<code>define</code>、<code>endif</code>三者的作用，为什么这样组织文件？</p>
+</blockquote>
+<ul>
+<li>使用GCC 编译<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gcc -c myprintf.c -o myprintf.o</span><br><span class="line"><span class="variable">$ </span>gcc -c main.c -o main.o</span><br><span class="line"><span class="variable">$ </span>gcc myprintf.o main.o -o hello</span><br><span class="line"><span class="variable">$ </span>./hello <span class="comment"># 执行</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>思考为什么需要多步编译，能不能一步编译成功？</p>
+</blockquote>
+<h3 id="Makefile__u5165_u95E8"><a href="#Makefile__u5165_u95E8" class="headerlink" title="Makefile 入门"></a>Makefile 入门</h3><p>上面最后的问题，答案是肯定的。用<code>Makefile</code>编译上面的三个文件,创建一个名为<code>Makefile</code>的文件,内容如下:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hello: myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	gcc -o hello myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	gcc -c -o myprintf<span class="class">.o</span> myprintf<span class="class">.c</span></span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	gcc -c -o main<span class="class">.o</span> main.c</span><br></pre></td></tr></table></figure></p>
+<p>然后在命令行下执行<code>make</code>命令，就可以得到<code>hello</code>文件。<br>Makefile 文件的核心组成是“规则”,一条规则的结构如下:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目标：条件 <span class="number">1</span> 条件 <span class="number">2</span> ...</span><br><span class="line">	命令 <span class="number">1</span></span><br><span class="line">	命令 <span class="number">2</span></span><br><span class="line">	 ...</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>,各条命令前面必须有一个<code>Tab</code>(制表符),不能是两个<code>Tab</code>,也不能是空格,只能是一个<code>Tab</code>。<br>概括起来相当于:要得到“目标”,需要具备“条件1”、“条件2”……,并且要顺序地执行“命令 1”、“命令2”……<br>条件可以是文件,也可以是其他规则的目标。执行<code>make</code>命令的时候,<code>make</code>会在当前目录下寻找<code>Makefile</code>问价,并将文件的第一条规则的目标当做本次执行的目标。<br><code>Makefile</code>的功能非常复杂,可以用一整本书来讲,下面只介绍一些基本用法。<br><code>Makefile</code>可以定义变量,   <code>:=</code>用来赋值,使用变量的时候要用<code>$(..)</code>。前面的例子可以改写 为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o hello myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o myprintf<span class="class">.o</span> myprintf<span class="class">.c</span></span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o main<span class="class">.o</span> main.c</span><br></pre></td></tr></table></figure></p>
+<p>在每一条规则内部,可以使用<code>$@</code>来代表这条规则的目标,用<code>$&lt;</code>来表示这条规则中的第一个条件,用<code>$^</code>表示所有的条件,因此前面的例子可以改写为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o $@ @^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $@ $&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $@ $&lt;</span><br></pre></td></tr></table></figure></p>
+<p>如果不想在执行<code>make</code>命令的时候看到一对命令的输出,可以在命令前面加上 <code>@</code> ,例如:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br></pre></td></tr></table></figure></p>
+<p>如果还想看到编译的过程,可以加入一些自定义的输出命令,打印一些内容到终端:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	@echo <span class="string">"\033[1;34mlinking $@\033[0m"</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br></pre></td></tr></table></figure></p>
+<p><code>echo</code>命令中的<code>\033[1;34m</code>表示切换颜色。<br><code>Makefile</code>有一个功能,就是会自动比较目标文件的时间和依赖项的最近更改时间,只有需要重新 编译的文件<code>Makefile</code>才会执行相应的命令。对于一个比较大的项目,这个特点可以节省很多的时 间。<br>如果希望自动清理编译缓存(就是删除编译过程中生成的<code>.o文件</code>),可以给<code>Makefile</code> 加一个新 的规则:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	@echo <span class="string">"\033[1;34mlinking $@\033[0m"</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@echo <span class="string">"\033[1;33mcleaning $@\033[0m"</span></span><br><span class="line">	rm *.o</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/01/06/Linux-lab1/" data-id="cij2n16n000047ics3hpr0c1u" class="article-share-link" data-share="baidu" data-title="操作系统第一次上机教程——Linux基础">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2016/01/06/Linux-lab1/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux-lab2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/06/Linux-lab2/" class="article-date">
+  <time datetime="2016-01-06T09:08:35.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/Linux-lab2/">Linux lab2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/01/06/Linux-lab2/" data-id="cij2n16my00037icss4fycpdn" class="article-share-link" data-share="baidu" data-title="Linux lab2">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2016/01/06/Linux-lab2/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/06/hello-world/" class="article-date">
@@ -109,86 +261,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/01/06/hello-world/" data-id="cij2kkl4r0001pscs8n9e5v4i" class="article-share-link" data-share="baidu" data-title="Hexo 教程">分享到</a>
+        <a data-url="http://yoursite.com/2016/01/06/hello-world/" data-id="cij2n16mu00017icsug953ef6" class="article-share-link" data-share="baidu" data-title="Hexo 教程">分享到</a>
       
 
       
         <a href="http://yoursite.com/2016/01/06/hello-world/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux-lab1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/06/Linux-lab1/" class="article-date">
-  <time datetime="2016-01-06T08:53:27.000Z" itemprop="datePublished">2016-01-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@(学习资料)[OS, shell 命令, C语言, GCC编译]</p>
-<blockquote>
-<p>认识Linux</p>
-<ul>
-<li>岳友（yoyo9170@163.com）</li>
-</ul>
-</blockquote>
-<h3 id="u5173_u4E8ELinux_u7684_u5386_u53F2"><a href="#u5173_u4E8ELinux_u7684_u5386_u53F2" class="headerlink" title="关于Linux的历史"></a>关于Linux的历史</h3><p>也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 Linux。当时 Linus 把开发的这个系统内核丢到网上提供大家下载,由于 它的精致小巧,越来越多的爱好者去研究它。人们对这个内核添枝加叶,而后成为了一个系统。 也许你听说过吧,Linux 是免费的。其实这里的免费只是说 Linux 的内核免费。在 Linux 内核的 基础上而产生了众多 Linux 的版本。<br>Linux 的发行版说简单点就是将 Linux 内核与应用软件做一个打包。较知名的发行版有: Ubuntu、RedHat、CentOS、Debain、Fedora、SuSE、OpenSUSE、TurboLinux、 BluePoint、RedFlag、Xterm、SlackWare 等。<br>而常用的就是 Redhat 和CentOS,这里有必要说一下,其实 CentOS 是基于 Redhat 的, 网上有人说,Centos 是 Redhat 企业版的克隆。CentOS 较之于 Redhat 可以免费使用 yum 下载安装所需要的软件包,这个是相当方便的。而 Redhat 要想使用 yum 必须要购买服务了。</p>
-<h3 id="u56FE_u5F62_u754C_u9762_u8FD8_u662F_u547D_u4EE4_u7A97_u53E3"><a href="#u56FE_u5F62_u754C_u9762_u8FD8_u662F_u547D_u4EE4_u7A97_u53E3" class="headerlink" title="图形界面还是命令窗口"></a>图形界面还是命令窗口</h3><p>对于 linux 的应用,我想大多数都是用在服务器领域,对于服务器来讲真的没有必要跑一个图形界 面。所以我们平时安装 linux 操作系统时往往是不安装图形界面的。说到这里也许你会有疑问,图 形界面还能选择装或者不装?<br>是的,虽然 linux 和微软的 windows 一样同位操作系统,但是它们有一个很大的区别就是 windows 操作系统的图形界面是和内核一体的,俗称微内核,而 linux 操作系统图形界面就像一个软件一样, 和内核并不是一体的。所以 linux 你可以选择不安装图形界面,这样不仅不影响服务器的正常使用 还可以节省系统资源的开销,何乐而不为呢?<br>如果你对 linux 超级感兴趣,想使用 linux 就像使用 windows 一样,那你可以安装图形界面,可以像 windows 一样来体验 linux 也是蛮不错的。但是如果你想成为一个专业的 linux系统工程师,那我建 议你从第一天开始就不要去安装图形界面,从命令窗口开始熟悉它。<br>另外一点值得说的是,日常应用中,我们都是远程管理服务器的,不可能开着图形界面来让你去操作, 虽然目前也有相应的工具支持远程图形连接服务器,可是那样太消耗网络带宽资源,所以从这方面 来考虑还是建议你不要使用图形界面。</p>
-<h3 id="Linux_u57FA_u7840_u64CD_u4F5C_u547D_u4EE4"><a href="#Linux_u57FA_u7840_u64CD_u4F5C_u547D_u4EE4" class="headerlink" title="Linux基础操作命令"></a>Linux基础操作命令</h3><p><strong>强烈建议大家可以去阅读<code>《鸟哥的私房菜》</code>，这是对于Linux初学者来说就是圣典。</strong></p>
-<h4 id="1_u3001_u67E5_u770B_u767B_u5F55_u7528_u6237"><a href="#1_u3001_u67E5_u770B_u767B_u5F55_u7528_u6237" class="headerlink" title="1、查看登录用户"></a>1、查看登录用户</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who</span><br><span class="line"><span class="variable">$ </span>who am i</span><br></pre></td></tr></table></figure>
-<h4 id="2_u3001_u67E5_u770B_u865A_u62DF_u63A7_u5236_u53F0_uFF08_u7EC8_u7AEF_uFF09_u5F53_u524D_u76EE_u5F55"><a href="#2_u3001_u67E5_u770B_u865A_u62DF_u63A7_u5236_u53F0_uFF08_u7EC8_u7AEF_uFF09_u5F53_u524D_u76EE_u5F55" class="headerlink" title="2、查看虚拟控制台（终端）当前目录"></a>2、查看虚拟控制台（终端）当前目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
-<h4 id="3_u3001_u67E5_u770B_u8054_u673A_uFF08_u5E2E_u52A9_uFF09_u624B_u518C"><a href="#3_u3001_u67E5_u770B_u8054_u673A_uFF08_u5E2E_u52A9_uFF09_u624B_u518C" class="headerlink" title="3、查看联机（帮助）手册"></a>3、查看联机（帮助）手册</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">man</span> <span class="keyword">cd</span>   #查看 <span class="keyword">cd</span> 命令的帮助文档（按 HJKL 移动光标，按 Q 退出）</span><br></pre></td></tr></table></figure>
-<h4 id="4_u3001_u67E5_u770B_u5F53_u524D_u5DE5_u4F5C_u76EE_u5F55_u4E0B_u7684_u6587_u4EF6"><a href="#4_u3001_u67E5_u770B_u5F53_u524D_u5DE5_u4F5C_u76EE_u5F55_u4E0B_u7684_u6587_u4EF6" class="headerlink" title="4、查看当前工作目录下的文件"></a>4、查看当前工作目录下的文件</h4><ul>
-<li><p><strong>常见用法</strong> </p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buaasoft<span class="constant">@buaasoft_virtual_machine</span>:/var$ ls</span><br><span class="line">backups  cache  crash  games  lib  <span class="keyword">local</span>  lock  <span class="built_in">log</span>  mail  <span class="built_in">opt</span>  <span class="built_in">run</span>  spool  tmp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>查看全部文件</strong></p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buaasoft<span class="constant">@buaasoft_virtual_machine</span>:/var$ ls -a</span><br><span class="line">.  ..  backups  cache  crash  games  lib  <span class="keyword">local</span>  lock  <span class="built_in">log</span>  mail  <span class="built_in">opt</span>  <span class="built_in">run</span>  spool  tmp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>查看详细信息</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">buaasoft@buaasoft_virtual_machine:/var$ ls -l</span><br><span class="line">total <span class="number">44</span></span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">48</span> backups</span><br><span class="line">drwxr-xr-x <span class="number">17</span> root root     <span class="number">4096</span> Oct <span class="number">13</span> <span class="number">20</span>:<span class="number">40</span> cache</span><br><span class="line">drwxrwsrwt  <span class="number">2</span> root whoopsie <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">44</span> crash</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> games</span><br><span class="line">drwxr-xr-x <span class="number">61</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> lib</span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root staff    <span class="number">4096</span> Jan <span class="number">27</span>  <span class="number">2012</span> local</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">9</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> lock -&gt; /run/lock</span><br><span class="line">drwxr-xr-x <span class="number">18</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> <span class="built_in">log</span></span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root mail     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> mail</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> opt</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">4</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> run -&gt; /run</span><br><span class="line">drwxr-xr-x  <span class="number">8</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> spool</span><br><span class="line">drwxrwxrwt  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">15</span> <span class="number">20</span>:<span class="number">13</span> tmp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>查看隐藏文件</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">buaasoft@buaasoft_virtual_machine:/var$ ls -la <span class="preprocessor">#或者 ls -al, ls -l -a</span></span><br><span class="line">total <span class="number">52</span></span><br><span class="line">drwxr-xr-x <span class="number">13</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> .</span><br><span class="line">drwxr-xr-x <span class="number">23</span> root root     <span class="number">4096</span> Aug  <span class="number">4</span> <span class="number">00</span>:<span class="number">20</span> ..</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">48</span> backups</span><br><span class="line">drwxr-xr-x <span class="number">17</span> root root     <span class="number">4096</span> Oct <span class="number">13</span> <span class="number">20</span>:<span class="number">40</span> cache</span><br><span class="line">drwxrwsrwt  <span class="number">2</span> root whoopsie <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">44</span> crash</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> games</span><br><span class="line">drwxr-xr-x <span class="number">61</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> lib</span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root staff    <span class="number">4096</span> Jan <span class="number">27</span>  <span class="number">2012</span> local</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">9</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> lock -&gt; /run/lock</span><br><span class="line">drwxr-xr-x <span class="number">18</span> root root     <span class="number">4096</span> Nov <span class="number">21</span> <span class="number">00</span>:<span class="number">48</span> <span class="built_in">log</span></span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root mail     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> mail</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> opt</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">4</span> Aug <span class="number">16</span> <span class="number">03</span>:<span class="number">28</span> run -&gt; /run</span><br><span class="line">drwxr-xr-x  <span class="number">8</span> root root     <span class="number">4096</span> Mar <span class="number">27</span>  <span class="number">2012</span> spool</span><br><span class="line">drwxrwxrwt  <span class="number">2</span> root root     <span class="number">4096</span> Aug <span class="number">15</span> <span class="number">20</span>:<span class="number">13</span> tmp</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>在 Ubuntu 上,还可以使用<code>ll</code>和 <code>la</code>。</p>
-<h4 id="5_u3001_u5207_u6362_u5DE5_u4F5C_u76EE_u5F55"><a href="#5_u3001_u5207_u6362_u5DE5_u4F5C_u76EE_u5F55" class="headerlink" title="5、切换工作目录"></a>5、切换工作目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr	<span class="comment"># 进入绝对路径 '／usr'</span></span><br><span class="line">$ <span class="built_in">cd</span> ..		<span class="comment"># 返回上一层目录</span></span><br><span class="line">$ <span class="built_in">cd</span> -		<span class="comment"># 回到刚才目录</span></span><br><span class="line">$ <span class="built_in">cd</span> /		<span class="comment"># 进入根目录</span></span><br><span class="line">$ <span class="built_in">cd</span> ~	 	<span class="comment"># 进入用户目录</span></span><br></pre></td></tr></table></figure>
-<h4 id="6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="6、创建目录和文件"></a>6、创建目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">mkdir</span> <span class="keyword">lab</span>		# 在当前目录下创建 <span class="keyword">lab</span> 目录</span><br><span class="line">$ <span class="keyword">mkdir</span> -p <span class="keyword">lab</span>/<span class="keyword">report</span> 	# 在当前目录下创建 <span class="keyword">lab</span> ，并在 <span class="keyword">lab</span> 下创建 <span class="keyword">report</span></span><br><span class="line">$ touch hello.c 	# 创建一个名为 hello.c 的空文件</span><br></pre></td></tr></table></figure>
-<h4 id="7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="7、删除目录和文件"></a>7、删除目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">rm</span> hello.c 	# 删除文件hello.c</span><br><span class="line">$ <span class="keyword">rmdir</span> <span class="keyword">lab</span>	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -r <span class="keyword">lab</span> 	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -rf <span class="keyword">lab</span> 	# 删除目录<span class="keyword">lab</span>（可以非空）</span><br></pre></td></tr></table></figure>
-<h4 id="8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6"><a href="#8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6" class="headerlink" title="8、复制和移动文件"></a>8、复制和移动文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">cp</span> <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 复制到 target （保留原文件）</span><br><span class="line">$ mv <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 移动到 target （不保留原文件）</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2016/01/06/Linux-lab1/" data-id="cij2kqjpq0000w9csc0uxvvkn" class="article-share-link" data-share="baidu" data-title="操作系统第一次上机教程——Linux基础">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2016/01/06/Linux-lab1/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -254,11 +331,55 @@ private Timer timer = new Timer();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/" data-id="cij2kkl4e0000pscsqenueqx2" class="article-share-link" data-share="baidu" data-title="android点击两次退出应用">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/" data-id="cij2n16mk00007icsvqyr5cet" class="article-share-link" data-share="baidu" data-title="android点击两次退出应用">分享到</a>
       
 
       
         <a href="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-first-love-story" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/01/first-love-story/" class="article-date">
+  <time datetime="2015-08-01T09:02:26.000Z" itemprop="datePublished">2015-08-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/01/first-love-story/">写给她的第一封信</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>坐在去上海的火车上，天气依旧是雨，无聊地看着窗外飞过的风景和身旁回上海的情侣，心绪就像后退的街景往后追溯～～<br>然后拿着手机，忽然想写点文字了，只因为明天——它于现在的我而言，有特殊的意义！<br>王家卫曾这样描述爱情：那一刻，我很暖！回想四个月前，我赞同了王先生的话，两个人打着电话傻傻地笑着，两个熟悉的人却羞赧地面对面吃饭，还一起坐在还有些微凉的亭子里抱着彼此，但浑然不觉得冷～～<br>那不是我刻意设计的桥段，虽然在我内心深处，我相信它后面一定会发生，只是没想它的发生带给人的竟然是那般温暖和幸福的感觉。<br>晚上躺在床上，还傻傻地甚至有点质疑地问自己：我又恋爱了？又是和从班上的同学？妈蛋，我是不是太不厚道。。。。。。<br>是的，我又恋爱了，我怀着一颗激动而又忐忑的心去确认了n次这个事实。然而事实也反过来诉我：孩子，别激动，也别害怕，过去已经过去，还有未来！一个如此美好的姑娘，一个如此美好的生活开端，接下来你将如何延续这段美好？<br>  我承认我小白了，那一刻似乎百试不爽的工科逻辑、运算思维和丰富想象都歇菜了。我该怎样正确地以一个男朋友的身份去对待一个姑娘：逗她开心？陪她逛街？了解她的爱好？======<br>       这种小白很快反应在生活中了：过分的关心，让你感觉不自由，不太懂你的喜怒哀乐，说话不经过大脑，总是沉默不说令媳妇儿心情更糟。。。。。。<br>      但是生活就是这样宽容，总有个人会容许你犯错，可是不是人人都可以像爱迪生一样犯1000次错误然后才屁颠屁颠弄出个灯泡儿来。于是，慢慢的我平静了，我慢慢适应了这种生活和这种身份：<br>       不再过于激动半夜凌晨三、四点醒来不能入睡；<br>       不再过于担心你每天的吃喝拉撒我有没有服务到位；<br>       不再过于紧张你的忧伤和疲惫。。。。。。<br>       我知道，你需要的是一个依靠和肩膀，需要一个可以跟你share喜悦和哇靠，需要一个可以陪你去看医生照顾你身体，需要一个可以懂你的余氏心思，需要一个可以让你觉得生活很nice的人，我想我已经在慢慢做到，并将最终能做到！<br>       这四个月，或许有别离，或许有郁闷，或许有伤痛（附：嘿嘿。。曾经晚上从学校去赶地铁，跑的过于风骚，摔马路牙子上了），但是最后我忽然想用一个貌似幽默却又跟前面不搭的话来结束这段文字——赵本山小品《白云黑土》中黑土很羞涩却很顺溜的跟白云说：别怕，有老头呢！<br>      胡乱写在2014.8.1，去上海的火车上，很平凡的一天，七夕节的前一天，四个月纪念的前六天，但于我和末末余，每一天都是重要和快乐的一天，不管身在何时何方！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/08/01/first-love-story/" data-id="cij2n16mw00027ics77x8vi6h" class="article-share-link" data-share="baidu" data-title="写给她的第一封信">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2015/08/01/first-love-story/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -285,7 +406,7 @@ private Timer timer = new Timer();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -297,15 +418,23 @@ private Timer timer = new Timer();
       <ul>
         
           <li>
-            <a href="/2016/01/06/hello-world/">Hexo 教程</a>
-          </li>
-        
-          <li>
             <a href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
           </li>
         
           <li>
+            <a href="/2016/01/06/Linux-lab2/">Linux lab2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/06/hello-world/">Hexo 教程</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/10/Android-TwiceClick-Quit-0/">android点击两次退出应用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/01/first-love-story/">写给她的第一封信</a>
           </li>
         
       </ul>

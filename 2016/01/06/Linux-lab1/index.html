@@ -6,37 +6,37 @@
   
   <title>操作系统第一次上机教程——Linux基础 | yoyo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+  <meta name="description" content="@(学习资料)[OS, shell 命令,C 语言,GCC编译]
 
 认识Linux
 
 岳友（yoyo9170@163.com）
 
 
-关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 Li">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统第一次上机教程——Linux基础">
 <meta property="og:url" content="http://yoursite.com/2016/01/06/Linux-lab1/index.html">
 <meta property="og:site_name" content="yoyo">
-<meta property="og:description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+<meta property="og:description" content="@(学习资料)[OS, shell 命令,C 语言,GCC编译]
 
 认识Linux
 
 岳友（yoyo9170@163.com）
 
 
-关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
-<meta property="og:updated_time" content="2016-01-06T08:53:27.000Z">
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 Li">
+<meta property="og:updated_time" content="2016-01-06T11:47:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统第一次上机教程——Linux基础">
-<meta name="twitter:description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+<meta name="twitter:description" content="@(学习资料)[OS, shell 命令,C 语言,GCC编译]
 
 认识Linux
 
 岳友（yoyo9170@163.com）
 
 
-关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 Li">
   
     <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
   
@@ -96,7 +96,7 @@
       <section id="main"><article id="post-Linux-lab1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/06/Linux-lab1/" class="article-date">
-  <time datetime="2016-01-06T08:53:27.000Z" itemprop="datePublished">2016-01-06</time>
+  <time datetime="2016-01-06T11:47:16.000Z" itemprop="datePublished">2016-01-06</time>
 </a>
     
   </div>
@@ -115,7 +115,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>@(学习资料)[OS, shell 命令, C语言, GCC编译]</p>
+        <p>@(学习资料)[OS, shell 命令,C 语言,GCC编译]</p>
 <blockquote>
 <p>认识Linux</p>
 <ul>
@@ -147,12 +147,46 @@
 <h4 id="6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#6_u3001_u521B_u5EFA_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="6、创建目录和文件"></a>6、创建目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">mkdir</span> <span class="keyword">lab</span>		# 在当前目录下创建 <span class="keyword">lab</span> 目录</span><br><span class="line">$ <span class="keyword">mkdir</span> -p <span class="keyword">lab</span>/<span class="keyword">report</span> 	# 在当前目录下创建 <span class="keyword">lab</span> ，并在 <span class="keyword">lab</span> 下创建 <span class="keyword">report</span></span><br><span class="line">$ touch hello.c 	# 创建一个名为 hello.c 的空文件</span><br></pre></td></tr></table></figure>
 <h4 id="7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6"><a href="#7_u3001_u5220_u9664_u76EE_u5F55_u548C_u6587_u4EF6" class="headerlink" title="7、删除目录和文件"></a>7、删除目录和文件</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">rm</span> hello.c 	# 删除文件hello.c</span><br><span class="line">$ <span class="keyword">rmdir</span> <span class="keyword">lab</span>	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -r <span class="keyword">lab</span> 	# 删除空目录<span class="keyword">lab</span></span><br><span class="line">$ <span class="keyword">rm</span> -rf <span class="keyword">lab</span> 	# 删除目录<span class="keyword">lab</span>（可以非空）</span><br></pre></td></tr></table></figure>
 <h4 id="8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6"><a href="#8_u3001_u590D_u5236_u548C_u79FB_u52A8_u6587_u4EF6" class="headerlink" title="8、复制和移动文件"></a>8、复制和移动文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">cp</span> <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 复制到 target （保留原文件）</span><br><span class="line">$ mv <span class="keyword">source</span> target # 将 <span class="keyword">source</span> 移动到 target （不保留原文件）</span><br></pre></td></tr></table></figure>
+<h3 id="Linux_C_u7F16_u7A0B_u57FA_u7840"><a href="#Linux_C_u7F16_u7A0B_u57FA_u7840" class="headerlink" title="Linux C编程基础"></a>Linux C编程基础</h3><h4 id="1_u3001GCC_u7684_u4F7F_u7528"><a href="#1_u3001GCC_u7684_u4F7F_u7528" class="headerlink" title="1、GCC的使用"></a>1、GCC的使用</h4><ul>
+<li>用 <code>vim</code> 编写<code>hello.c</code>源文件<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[], <span class="keyword">char</span> *env[])</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,<span class="string">"hello,world!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>思考一下main函数第三个参数的作用！</p>
+</blockquote>
+<ul>
+<li>使用GCC编译源代码<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gcc -<span class="constant">E</span> hello.c -o hello.i 	<span class="comment"># 预处理，生成hello.i</span></span><br><span class="line"><span class="variable">$ </span>gcc -<span class="constant">S</span> hello.c -o hello.s 	<span class="comment"># 编译，生成汇编文件 hello.s</span></span><br><span class="line"><span class="variable">$ </span>gcc -c hello.c -o hello.o	<span class="comment"># 编译，生成目标代码 hello.o</span></span><br><span class="line"><span class="variable">$ </span>gcc hello.o -o hello 		<span class="comment"># 链接，生成可执行文件 hello</span></span><br><span class="line"><span class="variable">$ </span>./hello 						<span class="comment"># 执行 hello</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>当然上面是为了让大家了解C代码是如何被编译、链接并最终执行的过程，其中每一步过程对于开发者来说都是透明的，如果熟悉了这一系列的步骤，可以采取<code>gcc hello.c -o hello</code> 一步生成可执行文件。</p>
+</blockquote>
+<h4 id="2_u3001GCC_u7F16_u8BD1_u591A_u6E90_u7801_u6587_u4EF6_u7684_u5DE5_u7A0B"><a href="#2_u3001GCC_u7F16_u8BD1_u591A_u6E90_u7801_u6587_u4EF6_u7684_u5DE5_u7A0B" class="headerlink" title="2、GCC编译多源码文件的工程"></a>2、GCC编译多源码文件的工程</h4><p><code>myprintf.h</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">ifndef</span> MYPRINTF_H</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MYPRINTF_H</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myprintf</span><span class="params">(<span class="keyword">char</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p><code>myprintf.c</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"myprintf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myprintf</span><span class="params">(<span class="keyword">char</span> *s)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"myprintf: %s.\n"</span>,s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>main.c</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"myprintf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	myprintf(<span class="string">"hello,world!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>思考一下<code>ifndef</code>、<code>define</code>、<code>endif</code>三者的作用，为什么这样组织文件？</p>
+</blockquote>
+<ul>
+<li>使用GCC 编译<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gcc -c myprintf.c -o myprintf.o</span><br><span class="line"><span class="variable">$ </span>gcc -c main.c -o main.o</span><br><span class="line"><span class="variable">$ </span>gcc myprintf.o main.o -o hello</span><br><span class="line"><span class="variable">$ </span>./hello <span class="comment"># 执行</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>思考为什么需要多步编译，能不能一步编译成功？</p>
+</blockquote>
+<h3 id="Makefile__u5165_u95E8"><a href="#Makefile__u5165_u95E8" class="headerlink" title="Makefile 入门"></a>Makefile 入门</h3><p>上面最后的问题，答案是肯定的。用<code>Makefile</code>编译上面的三个文件,创建一个名为<code>Makefile</code>的文件,内容如下:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hello: myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	gcc -o hello myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	gcc -c -o myprintf<span class="class">.o</span> myprintf<span class="class">.c</span></span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	gcc -c -o main<span class="class">.o</span> main.c</span><br></pre></td></tr></table></figure></p>
+<p>然后在命令行下执行<code>make</code>命令，就可以得到<code>hello</code>文件。<br>Makefile 文件的核心组成是“规则”,一条规则的结构如下:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目标：条件 <span class="number">1</span> 条件 <span class="number">2</span> ...</span><br><span class="line">	命令 <span class="number">1</span></span><br><span class="line">	命令 <span class="number">2</span></span><br><span class="line">	 ...</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>,各条命令前面必须有一个<code>Tab</code>(制表符),不能是两个<code>Tab</code>,也不能是空格,只能是一个<code>Tab</code>。<br>概括起来相当于:要得到“目标”,需要具备“条件1”、“条件2”……,并且要顺序地执行“命令 1”、“命令2”……<br>条件可以是文件,也可以是其他规则的目标。执行<code>make</code>命令的时候,<code>make</code>会在当前目录下寻找<code>Makefile</code>问价,并将文件的第一条规则的目标当做本次执行的目标。<br><code>Makefile</code>的功能非常复杂,可以用一整本书来讲,下面只介绍一些基本用法。<br><code>Makefile</code>可以定义变量,   <code>:=</code>用来赋值,使用变量的时候要用<code>$(..)</code>。前面的例子可以改写 为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o hello myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o myprintf<span class="class">.o</span> myprintf<span class="class">.c</span></span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o main<span class="class">.o</span> main.c</span><br></pre></td></tr></table></figure></p>
+<p>在每一条规则内部,可以使用<code>$@</code>来代表这条规则的目标,用<code>$&lt;</code>来表示这条规则中的第一个条件,用<code>$^</code>表示所有的条件,因此前面的例子可以改写为:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o $@ @^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $@ $&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $@ $&lt;</span><br></pre></td></tr></table></figure></p>
+<p>如果不想在执行<code>make</code>命令的时候看到一对命令的输出,可以在命令前面加上 <code>@</code> ,例如:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br></pre></td></tr></table></figure></p>
+<p>如果还想看到编译的过程,可以加入一些自定义的输出命令,打印一些内容到终端:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	@echo <span class="string">"\033[1;34mlinking $@\033[0m"</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br></pre></td></tr></table></figure></p>
+<p><code>echo</code>命令中的<code>\033[1;34m</code>表示切换颜色。<br><code>Makefile</code>有一个功能,就是会自动比较目标文件的时间和依赖项的最近更改时间,只有需要重新 编译的文件<code>Makefile</code>才会执行相应的命令。对于一个比较大的项目,这个特点可以节省很多的时 间。<br>如果希望自动清理编译缓存(就是删除编译过程中生成的<code>.o文件</code>),可以给<code>Makefile</code> 加一个新 的规则:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TARGET := hello</span><br><span class="line">CC := gcc</span><br><span class="line"></span><br><span class="line">$(TARGET): myprintf<span class="class">.o</span> main<span class="class">.o</span></span><br><span class="line">	@echo <span class="string">"\033[1;34mlinking $@\033[0m"</span></span><br><span class="line">	$(cc) -o $$^</span><br><span class="line"></span><br><span class="line">myprintf<span class="class">.o</span>: myprintf<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">main<span class="class">.o</span>: main<span class="class">.c</span> myprintf<span class="class">.h</span></span><br><span class="line">	@echo <span class="string">"\033[1;32mcompiling $@\033[0m"</span></span><br><span class="line">	$(cc) -c -o $$&lt;</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@echo <span class="string">"\033[1;33mcleaning $@\033[0m"</span></span><br><span class="line">	rm *.o</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/01/06/Linux-lab1/" data-id="cij2kqjpq0000w9csc0uxvvkn" class="article-share-link" data-share="baidu" data-title="操作系统第一次上机教程——Linux基础">分享到</a>
+        <a data-url="http://yoursite.com/2016/01/06/Linux-lab1/" data-id="cij2n16n000047ics3hpr0c1u" class="article-share-link" data-share="baidu" data-title="操作系统第一次上机教程——Linux基础">分享到</a>
       
 
       
@@ -166,19 +200,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/01/06/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          Hexo 教程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/01/06/Linux-lab2/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">android点击两次退出应用</div>
+      <div class="article-nav-title">Linux lab2</div>
     </a>
   
 </nav>
@@ -205,7 +230,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -217,15 +242,23 @@
       <ul>
         
           <li>
-            <a href="/2016/01/06/hello-world/">Hexo 教程</a>
-          </li>
-        
-          <li>
             <a href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
           </li>
         
           <li>
+            <a href="/2016/01/06/Linux-lab2/">Linux lab2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/06/hello-world/">Hexo 教程</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/10/Android-TwiceClick-Quit-0/">android点击两次退出应用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/01/first-love-story/">写给她的第一封信</a>
           </li>
         
       </ul>
