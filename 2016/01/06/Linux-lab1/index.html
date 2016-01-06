@@ -4,17 +4,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yoyo</title>
+  <title>操作系统第一次上机教程——Linux基础 | yoyo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="yoyo&apos;s blog | Android | Linux | python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yoyo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+
+认识Linux
+
+岳友（yoyo9170@163.com）
+
+
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统第一次上机教程——Linux基础">
+<meta property="og:url" content="http://yoursite.com/2016/01/06/Linux-lab1/index.html">
 <meta property="og:site_name" content="yoyo">
-<meta property="og:description" content="yoyo&apos;s blog | Android | Linux | python">
+<meta property="og:description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+
+认识Linux
+
+岳友（yoyo9170@163.com）
+
+
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
+<meta property="og:updated_time" content="2016-01-06T08:53:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yoyo">
-<meta name="twitter:description" content="yoyo&apos;s blog | Android | Linux | python">
+<meta name="twitter:title" content="操作系统第一次上机教程——Linux基础">
+<meta name="twitter:description" content="@(学习资料)[OS, shell 命令, C语言, GCC编译]
+
+认识Linux
+
+岳友（yoyo9170@163.com）
+
+
+关于Linux的历史也许有人已经了解到,Linux 和 Unix 是非常像的。没错,Linux 就是根据 Unix 演变过来的。 当年 Linus Torvalds 就是因为接触到了 Unix 而后才自己想开发一个简易的系统内核的,他开发 的简易系统内核其实就是 L">
   
     <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
   
@@ -71,61 +93,7 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/06/hello-world/" class="article-date">
-  <time datetime="2016-01-06T08:54:50.000Z" itemprop="datePublished">2016-01-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/hello-world/">Hexo 教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2016/01/06/hello-world/" data-id="cij2kkl4r0001pscs8n9e5v4i" class="article-share-link" data-share="baidu" data-title="Hexo 教程">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2016/01/06/hello-world/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux-lab1" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-Linux-lab1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/06/Linux-lab1/" class="article-date">
   <time datetime="2016-01-06T08:53:27.000Z" itemprop="datePublished">2016-01-06</time>
@@ -138,8 +106,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
+    <h1 class="article-title" itemprop="name">
+      操作系统第一次上机教程——Linux基础
     </h1>
   
 
@@ -195,82 +163,34 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Android-TwiceClick-Quit-0" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" class="article-date">
-  <time datetime="2015-12-10T10:04:14.000Z" itemprop="datePublished">2015-12-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2016/01/06/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
         
+          Hexo 教程
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/10/Android-TwiceClick-Quit-0/">android点击两次退出应用</a>
-    </h1>
   
+    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">android点击两次退出应用</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。</p>
-<pre><code>private static Boolean isQuit = false; 
-private Timer timer = new Timer();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!isQuit) {
-                isQuit = true;
-                Toast.makeText(getBaseContext(),
-                        R.string.back_more_quit,Toast.LENGTH_LONG).show();
-                TimerTask task = null;
-                task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        isQuit = false;
-                    }
-                };
-                timer.schedule(task, 2000);//其中task
-            } else {
-                finish();//结束当前Activity
-                System.exit(0);//退出应用
-            }
-        }
-        return false;
- }
-</code></pre><p>   当然Timer以及ScheduledExecutorService的应用绝不仅限单次定时任务，还能实现不间断重复任务，比如常见的banner轮播就可以用这两种方式来实现，感兴趣可以研究研究。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/" data-id="cij2kkl4e0000pscsqenueqx2" class="article-share-link" data-share="baidu" data-title="android点击两次退出应用">分享到</a>
-      
-
-      
-        <a href="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
   
 </article>
 
 
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/06/Linux-lab1/" data-title="操作系统第一次上机教程——Linux基础" data-url="http://yoursite.com/2016/01/06/Linux-lab1/"></div>
+  </section>
 
-  
-  
 </section>
       
       <aside id="sidebar">

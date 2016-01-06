@@ -4,24 +4,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>android点击两次退出应用 | yoyo</title>
+  <title>Hexo 教程 | yoyo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android点击两次退出应用">
-<meta property="og:url" content="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/index.html">
+<meta property="og:title" content="Hexo 教程">
+<meta property="og:url" content="http://yoursite.com/2016/01/06/hello-world/index.html">
 <meta property="og:site_name" content="yoyo">
-<meta property="og:description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
-<meta property="og:updated_time" content="2016-01-06T08:55:26.000Z">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick">
+<meta property="og:updated_time" content="2016-01-06T08:54:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android点击两次退出应用">
-<meta name="twitter:description" content="android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。
-private static Boolean isQuit = false; 
-private Time">
+<meta name="twitter:title" content="Hexo 教程">
+<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick">
   
     <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
   
@@ -78,10 +75,10 @@ private Time">
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Android-TwiceClick-Quit-0" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/10/Android-TwiceClick-Quit-0/" class="article-date">
-  <time datetime="2015-12-10T10:04:14.000Z" itemprop="datePublished">2015-12-10</time>
+    <a href="/2016/01/06/hello-world/" class="article-date">
+  <time datetime="2016-01-06T08:54:50.000Z" itemprop="datePublished">2016-01-06</time>
 </a>
     
   </div>
@@ -92,7 +89,7 @@ private Time">
         
   
     <h1 class="article-title" itemprop="name">
-      android点击两次退出应用
+      Hexo 教程
     </h1>
   
 
@@ -100,43 +97,25 @@ private Time">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>android应用开发过程中经常会遇到点击两次退出应用的场景，再android给出的定时机制中，有两种方式能够实现：1）TimerTask通过Timer来进行调度；2）利用ScheduledExecutorService来进行处理。本文主要利用TimerTask来实现，这也是最常见的实现方式。</p>
-<pre><code>private static Boolean isQuit = false; 
-private Timer timer = new Timer();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!isQuit) {
-                isQuit = true;
-                Toast.makeText(getBaseContext(),
-                        R.string.back_more_quit,Toast.LENGTH_LONG).show();
-                TimerTask task = null;
-                task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        isQuit = false;
-                    }
-                };
-                timer.schedule(task, 2000);//其中task
-            } else {
-                finish();//结束当前Activity
-                System.exit(0);//退出应用
-            }
-        }
-        return false;
- }
-</code></pre><p>   当然Timer以及ScheduledExecutorService的应用绝不仅限单次定时任务，还能实现不间断重复任务，比如常见的banner轮播就可以用这两种方式来实现，感兴趣可以研究研究。</p>
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/" data-id="cij2kkl4e0000pscsqenueqx2" class="article-share-link" data-share="baidu" data-title="android点击两次退出应用">分享到</a>
+        <a data-url="http://yoursite.com/2016/01/06/hello-world/" data-id="cij2kkl4r0001pscs8n9e5v4i" class="article-share-link" data-share="baidu" data-title="Hexo 教程">分享到</a>
       
 
       
-        <a href="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://yoursite.com/2016/01/06/hello-world/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -146,15 +125,11 @@ private Timer timer = new Timer();
     
 <nav id="article-nav">
   
-    <a href="/2016/01/06/Linux-lab1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          操作系统第一次上机教程——Linux基础
-        
-      </div>
-    </a>
   
+    <a href="/2016/01/06/Linux-lab1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">操作系统第一次上机教程——Linux基础</div>
+    </a>
   
 </nav>
 
@@ -163,7 +138,7 @@ private Timer timer = new Timer();
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2015/12/10/Android-TwiceClick-Quit-0/" data-title="android点击两次退出应用" data-url="http://yoursite.com/2015/12/10/Android-TwiceClick-Quit-0/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/06/hello-world/" data-title="Hexo 教程" data-url="http://yoursite.com/2016/01/06/hello-world/"></div>
   </section>
 
 </section>
