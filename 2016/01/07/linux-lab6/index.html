@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>操作系统第六次上机教程——Proc文件系统 | yoyo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@(学习资料)[OS, 文件系统, Proc伪文件系统]
+
+理解Linux操作系统文件系统的概念
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了动态加载内核模块，并完成了相应的实验，本次实验主要讲解和考察的是Linux 文件系统，其中核心主要涉及到三个方面：Proc文件系统介绍、文件创建、文件读写、内核空间与用户空间交互。
+
+Proc文件系统简介 Proc文件系统是一个虚拟文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统第六次上机教程——Proc文件系统">
+<meta property="og:url" content="http://yoursite.com/2016/01/07/linux-lab6/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="@(学习资料)[OS, 文件系统, Proc伪文件系统]
+
+理解Linux操作系统文件系统的概念
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了动态加载内核模块，并完成了相应的实验，本次实验主要讲解和考察的是Linux 文件系统，其中核心主要涉及到三个方面：Proc文件系统介绍、文件创建、文件读写、内核空间与用户空间交互。
+
+Proc文件系统简介 Proc文件系统是一个虚拟文件">
+<meta property="og:updated_time" content="2016-01-07T10:40:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统第六次上机教程——Proc文件系统">
+<meta name="twitter:description" content="@(学习资料)[OS, 文件系统, Proc伪文件系统]
+
+理解Linux操作系统文件系统的概念
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了动态加载内核模块，并完成了相应的实验，本次实验主要讲解和考察的是Linux 文件系统，其中核心主要涉及到三个方面：Proc文件系统介绍、文件创建、文件读写、内核空间与用户空间交互。
+
+Proc文件系统简介 Proc文件系统是一个虚拟文件">
+  
+    <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yoyo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">码农、程序员、未来的全栈攻城狮</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-linux-lab6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/07/linux-lab6/" class="article-date">
+  <time datetime="2016-01-07T10:26:51.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      操作系统第六次上机教程——Proc文件系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@(学习资料)[OS, 文件系统, Proc伪文件系统]</p>
+<blockquote>
+<p>理解Linux操作系统文件系统的概念</p>
+<ul>
+<li>岳友(yoyo9170@163.com)</li>
+</ul>
+<p>上节课我们主要介绍了动态加载内核模块，并完成了相应的实验，本次实验主要讲解和考察的是Linux 文件系统，其中核心主要涉及到三个方面：<strong>Proc文件系统</strong>介绍、文件创建、文件读写、内核空间与用户空间交互。</p>
+</blockquote>
+<h3 id="Proc_u6587_u4EF6_u7CFB_u7EDF_u7B80_u4ECB"><a href="#Proc_u6587_u4EF6_u7CFB_u7EDF_u7B80_u4ECB" class="headerlink" title="Proc文件系统简介"></a>Proc文件系统简介</h3><p> <code>Proc文件系统</code>是一个虚拟文件系统，只存在于内存中，通过它可以查询、设置系统的运行情况及各种系统参数。<br>在 <code>/proc</code>目录下，每个文件的读写都可以绑定到一个内核函数上；当文件被读写时，被绑定的相应的内核函数就会被触发，由这些函数处理文件的输出与输入。<br>而 <code>/proc</code>目录下几乎包含了系统所有信息：</p>
+<ul>
+<li>可以通过 <code>Proc文件系统</code>收集系统信息;</li>
+<li>也可以用于程序调试;</li>
+<li>还可以动态的修改内核的数据结构，改变内核的运行状态</li>
+</ul>
+<p>大家可以在自己的Linux系统里，进入到<code>/proc</code>目录下，会看到很多以数字命名的文件夹，这些一个个数字即对应着进程<code>PID</code>，根据上面提到的三点，不难理解这里主要收集系统运行进程的状态信息，具体对应参数和意义为：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件／目录名</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Cmdline</td>
+<td style="text-align:center">该进程的命令行参数</td>
+</tr>
+<tr>
+<td style="text-align:center">Cwd</td>
+<td style="text-align:center">进程运行的当前路径的符号链接</td>
+</tr>
+<tr>
+<td style="text-align:center">Environ</td>
+<td style="text-align:center">该进程运行的环境变量</td>
+</tr>
+<tr>
+<td style="text-align:center">Exe</td>
+<td style="text-align:center">该进程相关的程序的符号链接</td>
+</tr>
+<tr>
+<td style="text-align:center">Fd</td>
+<td style="text-align:center">包含该进程使用的文件描述符</td>
+</tr>
+<tr>
+<td style="text-align:center">Maps</td>
+<td style="text-align:center">可执行文件或库文件的内存映像</td>
+</tr>
+<tr>
+<td style="text-align:center">Mem</td>
+<td style="text-align:center">该进程使用的内存</td>
+</tr>
+<tr>
+<td style="text-align:center">Root</td>
+<td style="text-align:center">该进程所有者的家(home)目录</td>
+</tr>
+<tr>
+<td style="text-align:center">Stat</td>
+<td style="text-align:center">进程状态</td>
+</tr>
+<tr>
+<td style="text-align:center">Statm</td>
+<td style="text-align:center">进程的内存状态</td>
+</tr>
+<tr>
+<td style="text-align:center">Status</td>
+<td style="text-align:center">用易读的方式表示的进程状态</td>
+</tr>
+</tbody>
+</table>
+<p>当然<code>/proc</code>目录下还有一系列的文件,这些文件的作用<br>为:<br>   用<code>cat   /proc/cpuinfo</code> 命令获得系统的CPU信息<br>   用<code>cat  /proc/meminfo</code> 命令获得系统内存信息<br>   用<code>cat  /proc/loadvag</code> 命令获得CPU平均负载<br>   ……(请大家自己查看)</p>
+<h4 id="1_u3001_u6838_u5FC3_u6570_u636E_u7ED3_u6784"><a href="#1_u3001_u6838_u5FC3_u6570_u636E_u7ED3_u6784" class="headerlink" title="1、核心数据结构"></a>1、核心数据结构</h4><ul>
+<li>proc_dir_entry结构</li>
+</ul>
+<p>代表各文件节点,管理操作系统从用户空间到内核空间对文件读写的驱动<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> proc_dir_entry &#123; </span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *name; <span class="comment">//名字;</span></span><br><span class="line">	<span class="keyword">mode_t</span> mode; <span class="comment">//权限属性;</span></span><br><span class="line">	<span class="keyword">nlink_t</span> nlink; <span class="comment">//目录下子目录的数目;</span></span><br><span class="line">	<span class="keyword">read_proc_t</span> *read_proc;<span class="comment">//读操作函数</span></span><br><span class="line">	<span class="keyword">write_proc_t</span> *write_proc;<span class="comment">//写操作函数</span></span><br><span class="line">	<span class="keyword">struct</span> file_operations *proc_fops; <span class="comment">//文件操作函数; </span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2_u3001_u521B_u5EFA_u6587_u4EF6"><a href="#2_u3001_u521B_u5EFA_u6587_u4EF6" class="headerlink" title="2、创建文件"></a>2、创建文件</h4><ul>
+<li>头文件<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;linux/proc_fs.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>创建文件系统<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">struct</span> proc_dir_entry* <span class="title">create_proc_entry</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name, mode_t mode, <span class="keyword">struct</span> proc_dir_entry* parent)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>name:文件名<br>mode:文件类型和访问权限 parent:父目录,如果parent为根目录,则为NULL<br>返回值:成功,返回指向文件的proc_dir_entry结构指针.</p>
+</blockquote>
+<ul>
+<li>实例<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo_file = create_proc_entry(“foo”, <span class="number">0644</span>, example_dir);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3_u3001_u5220_u9664_u6587_u4EF6"><a href="#3_u3001_u5220_u9664_u6587_u4EF6" class="headerlink" title="3、删除文件"></a>3、删除文件</h4><p>内核通过函数<code>remove_proc_entry()</code>删除<code>proc</code>文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove_proc_entry</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">struct</span> proc_dir_entry* parent)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>从<code>parent</code>目录下移除名为<code>name</code>的文件 <code>proc</code>文件不能使用<code>rmdir</code>、<code>rm</code>命令删除,只能使用上述函数 在删除文件之前,先释放<code>proc_dir_entry</code>结构中的<code>data</code></p>
+</blockquote>
+<h4 id="4_u3001_u521B_u5EFA_u76EE_u5F55"><a href="#4_u3001_u521B_u5EFA_u76EE_u5F55" class="headerlink" title="4、创建目录"></a>4、创建目录</h4><ul>
+<li><p>创建一个目录</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">struct</span> proc_dir_entry* <span class="title">proc_mkdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">struct</span></span><br><span class="line">proc_dir_entry* parent)</span></span>; </span><br><span class="line"><span class="comment">//目录名为name,父目录为parent</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建符号连接</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">struct</span> proc_dir_entry* <span class="title">proc_symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">struct</span></span><br><span class="line">proc_dir_entry* parent, <span class="keyword">const</span> <span class="keyword">char</span>* dest)</span></span>;</span><br><span class="line"><span class="comment">//在parent目录下创建一个名字为name的符号连接,链接目标是dest</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="5_u3001_u7528_u6237_u7A7A_u95F4_u4E0E_u5185_u6838_u7A7A_u95F4_u6570_u636E_u4F20_u8F93"><a href="#5_u3001_u7528_u6237_u7A7A_u95F4_u4E0E_u5185_u6838_u7A7A_u95F4_u6570_u636E_u4F20_u8F93" class="headerlink" title="5、用户空间与内核空间数据传输"></a>5、用户空间与内核空间数据传输</h4><p><code>proc_dir_entry</code>结构中的<code>read_proc</code>, <code>write_proc</code>是回调函数,分别定义了对文件的读写函数;</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现读写文件接口</span></span><br><span class="line"><span class="keyword">struct</span> proc_dir_entry* foo_file;</span><br><span class="line">foo_file-&gt;read_proc = proc_read_foobar; </span><br><span class="line">foo_file-&gt;write_proc = proc_write_foobar;</span><br></pre></td></tr></table></figure>
+<h4 id="6_u3001_u8BFB_u53D6_u6587_u4EF6"><a href="#6_u3001_u8BFB_u53D6_u6587_u4EF6" class="headerlink" title="6、读取文件"></a>6、读取文件</h4><ul>
+<li>读文件接口函数原型<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read_func</span><span class="params">(<span class="keyword">char</span>* page, <span class="keyword">char</span>** start, off_t off, <span class="keyword">int</span> count, <span class="keyword">int</span>* eof,</span><br><span class="line"><span class="keyword">void</span>* data)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>其中，<code>Page</code>指针指向将写入数据的缓冲区 <code>Start</code>说明数据写在页面的位置 <code>Count</code>写入的字节数 <code>Offset</code>写入数据的位置相对于缓冲区的偏移量 <code>Eof</code>返回参数,当读到文件结尾时,该标志被置位 <code>Data</code>保存私有数据</p>
+</blockquote>
+<h4 id="7_u3001_u5199_u5165_u6587_u4EF6"><a href="#7_u3001_u5199_u5165_u6587_u4EF6" class="headerlink" title="7、写入文件"></a>7、写入文件</h4><ul>
+<li>写文件接口函数原型<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">write_func</span><span class="params">(<span class="keyword">struct</span> file* file, <span class="keyword">const</span> <span class="keyword">char</span>* buffer, <span class="keyword">unsigned</span> <span class="keyword">long</span> count, <span class="keyword">void</span>*</span><br><span class="line">data)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>从<code>buffer</code>数据缓冲区中读取<code>count</code>字节数的数据,写入到<code>file</code>文件<br>一般<code>buffer</code>指向用户空间缓冲区,应先调用<code>copy_from_user</code>将数据拷贝到内 核空间<br>一般省略<code>file</code>参数</p>
+</blockquote>
+<h3 id="u4EE3_u7801_u793A_u4F8B"><a href="#u4EE3_u7801_u793A_u4F8B" class="headerlink" title="代码示例"></a>代码示例</h3><h4 id="1_u3001_u5B9E_u73B0_u5728/Proc_u76EE_u5F55_u4E0B_u5E8A_u95F4_u4E00_u4E2A_u53EF_u8BFB_u53EF_u5199_u7684my_procfile_1K_u6587_u4EF6"><a href="#1_u3001_u5B9E_u73B0_u5728/Proc_u76EE_u5F55_u4E0B_u5E8A_u95F4_u4E00_u4E2A_u53EF_u8BFB_u53EF_u5199_u7684my_procfile_1K_u6587_u4EF6" class="headerlink" title="1、实现在/Proc目录下床间一个可读可写的my_procfile_1K文件"></a>1、实现在/Proc目录下床间一个可读可写的my_procfile_1K文件</h4><ul>
+<li><p><strong>编写 rw_proc.c 文件,如下</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;linux/proc_fs.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;asm/uaccess.h&gt;</span> /* for copy_from_user */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> PROCFS_MAX_SIZE <span class="number">1024</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> PROCFS_NAME <span class="string">"my_procfile_1k"</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">struct</span> proc_dir_entry *Our_Proc_File; </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> procfs_buffer[PROCFS_MAX_SIZE]; </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> procfs_buffer_size = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">procfile_read</span><span class="params">(<span class="keyword">char</span> *buffer,<span class="keyword">char</span> **buffer_location, off_t offset, <span class="keyword">int</span> buffer_length, <span class="keyword">int</span> *eof,</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	<span class="keyword">void</span> *data)</span></span><br><span class="line">	<span class="title">printk</span><span class="params">(KERN_INFO <span class="string">"procfile_read (/proc/%s) called\n"</span>, PROCFS_NAME)</span></span>; </span><br><span class="line">	<span class="keyword">if</span> (offset &gt; <span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		ret=<span class="number">0</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">memcpy</span>(buffer, procfs_buffer, procfs_buffer_size); </span><br><span class="line">		ret = procfs_buffer_size;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">procfile_write</span><span class="params">(<span class="keyword">struct</span> file *file, <span class="keyword">const</span> <span class="keyword">char</span> *buffer, <span class="keyword">unsigned</span> <span class="keyword">long</span> count, <span class="keyword">void</span> *data)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	procfs_buffer_size = count;</span><br><span class="line">	<span class="keyword">if</span>(procfs_buffer_size &gt; PROCFS_MAX_SIZE ) </span><br><span class="line">	&#123; </span><br><span class="line">		procfs_buffer_size = PROCFS_MAX_SIZE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(copy_from_user(procfs_buffer, buffer, procfs_buffer_size) ) </span><br><span class="line">	&#123; </span><br><span class="line">		<span class="keyword">return</span> EFAULT;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> procfs_buffer_size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">rw_proc_init</span><span class="params">(<span class="keyword">void</span>)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	Our_Proc_File = create_proc_entry(PROCFS_NAME, <span class="number">0644</span>, <span class="literal">NULL</span>); </span><br><span class="line">	<span class="keyword">if</span> (Our_Proc_File == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		remove_proc_entry(PROCFS_NAME, &amp;proc_root); </span><br><span class="line">		printk(KERN_ALERT <span class="string">"Error: Could not initialize /proc/%s\n"</span>, PROCFS_NAME);</span><br><span class="line">		<span class="keyword">return</span> ENOMEM;</span><br><span class="line">	&#125;</span><br><span class="line">	Our_Proc_File-&gt;read_proc = procfile_read; </span><br><span class="line">	Our_Proc_File-&gt;write_proc = procfile_write; </span><br><span class="line">	Our_Proc_File-&gt;owner = THIS_MODULE; </span><br><span class="line">	Our_Proc_File-&gt;mode = S_IFREG | S_IRUGO; </span><br><span class="line">	Our_Proc_File-&gt;uid = <span class="number">0</span>;</span><br><span class="line">	Our_Proc_File-&gt;gid = <span class="number">0</span>;</span><br><span class="line">	Our_Proc_File-&gt;size = <span class="number">37</span>;</span><br><span class="line">	printk(KERN_INFO <span class="string">"/proc/%s created\n"</span>, PROCFS_NAME); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rw_proc_exit</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	remove_proc_entry(PROCFS_NAME, &amp;proc_root);</span><br><span class="line">	printk(KERN_INFO <span class="string">"/proc/%s removed\n"</span>, PROCFS_NAME); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(r w_proc_init);</span><br><span class="line">module_exit(rw_proc_exit);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*代码注释</span><br><span class="line">A&gt; Our_Proc_File: /proc 文件系统下的每一个文件或目录项都对应一个proc_dir_entry 结构体实例。</span><br><span class="line">B&gt; procfs_buffer: 这个缓冲区是我们 my_procfile_1k 的真实载体,本质上我们将来对my_procfile_1k 文件的读写都是对该缓冲区的读写。</span><br><span class="line">C&gt; PROCFS_MAX_SIZE 和 procfs_buffer_size: 这两个值的关系就好比你有 4G(PROCFS_MAX_SIZE)的 U 盘,里面已用空间为 2.3G(procfs_buffer_size)一样。因此每次写入文件</span><br><span class="line">D&gt; procfile_read:我们为文件 my_procfile_1k 实现的 read 函数。buffer 为写出内核空间的缓冲区(一个 page 大小),buffer_location 是用来写出大于一个 page 大 小的数据是用的参数。offset 是用来标记一个进程中对当前文件读写的偏移量。 buffer_len 是要读的大小,这里被忽略掉,直接返回了文件(buffer)的全部内容。eof 用来标识文件已经到达末尾。</span><br><span class="line">E&gt; procfile_write:我们为文件 my_procfile_1k 实现的 write 函数。使用copy_from_user 函数的原因是 buffer 是一个指向用户地址空间的指针。</span><br><span class="line">F&gt; create_proc_entry:用来创建一个 proc 文件系统的文件实例,创建目录实例的 函数为 proc_mkdir(char * dirname, struct proc_dir_entr * father_dir);两个函数的末尾参数置 NULL,表示父目录为/proc</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>编写 Makefile 文件</strong></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">KVER=$(<span class="keyword">shell</span> uname -r) </span><br><span class="line">KDIR=/lib/modules/$(KVER)/build </span><br><span class="line"><span class="keyword">PWD</span>=$(<span class="keyword">shell</span> <span class="keyword">pwd</span>)</span><br><span class="line"></span><br><span class="line">obj-<span class="keyword">m</span> += rw_proc.o</span><br><span class="line">default:</span><br><span class="line">	make -C $(KDIR) <span class="keyword">M</span>=$(<span class="keyword">PWD</span>) modules</span><br><span class="line">clean:</span><br><span class="line">	-<span class="keyword">rm</span> *.ko</span><br><span class="line">	-<span class="keyword">rm</span> *.o </span><br><span class="line">	-<span class="keyword">rm</span> -f Mo*</span><br><span class="line">-<span class="keyword">rm</span> *.mod.*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>编译模块 #make</strong></p>
+</li>
+<li><p><strong>安装模块</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#insmod</span> <span class="tag">rw_proc</span><span class="class">.ko</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试/proc/my_procfile_1k 文件功能</strong> </p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#cat /proc/my_procfile_1k</span></span><br><span class="line"><span class="preprocessor">#ls * &gt; /proc/my_procfile_1k</span></span><br><span class="line"><span class="preprocessor">#cat /proc/my_procfile_1k</span></span><br><span class="line"><span class="preprocessor">#dmesg | tail -10 //查看系统日志里的打印信息</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>卸载模块</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmmod</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="u5B9E_u9A8C_u9898_u76EE"><a href="#u5B9E_u9A8C_u9898_u76EE" class="headerlink" title="实验题目"></a>实验题目</h3><p>1、（考查内核与用户空间的交互方式）在文档中给出的示例代码中<code>procfile_read</code>函数里面的<code>offset&gt;0</code>分支里面添加<code>printk</code>打印信息到系统日志，并编写一个读<code>my_procfile_1k</code>的c语言程序。在程序路循环五次读取<code>my_procfile_1k</code>文件并打印读取的信息。（贴出代码和截图）查看内核日志信息。想想为什么。</p>
+<p>2、（考查创建可读写的proc文件）在<code>/proc</code>目录下创建一个以<code>task_info</code>目录，并在里面创建一个<code>pid</code>文件和<code>task_info</code>文件：<code>pid</code>文件可读写，<code>task_info</code>文件只读。若<code>pid=-1</code>，则<code>task_info</code>文件的内容为当前系统所有进程的<code>ID</code>：应用程序名称的记录集合；若<code>pid=&gt;0</code>则<code>task_info</code>为进程<code>pid</code>的详细信息（自定义）。（请贴出代码并展示截图结果）<br>提示:<br>遍历所有进程可以用<code>Linux/sched.h</code>中的<code>for_each_process</code>宏实现：<br>struct tast_struct  * task;<br>for_each_prcess(task){<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/01/07/linux-lab6/" data-id="cij4488mg0001lhcsat832elb" class="article-share-link" data-share="baidu" data-title="操作系统第六次上机教程——Proc文件系统">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2016/01/07/linux-lab6/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/07/linux-lab5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">操作系统第五次上机教程——可加载内核模块</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/07/linux-lab6/" data-title="操作系统第六次上机教程——Proc文件系统" data-url="http://yoursite.com/2016/01/07/linux-lab6/"></div>
+  </section>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/01/07/linux-lab6/">操作系统第六次上机教程——Proc文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/linux-lab5/">操作系统第五次上机教程——可加载内核模块</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/Linux-lab4/">操作系统第四次上机教程——同步与互斥</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/Linux-lab3/">操作系统第三次上机教程——进程间通信</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xpddwn.github.io" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 xpddwn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xpddwn"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

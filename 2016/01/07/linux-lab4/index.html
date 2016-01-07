@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>操作系统第四次上机教程——同步与互斥 | yoyo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@(学习资料)[OS, 多线程, 进程同步, 进程互斥, 生产者与消费者]
+
+理解Linux操作系统多线程以及多线程之间关于资源的同步与互斥
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了管道和共享内存进程间通信，并完成了相应的实验，本次实验主要讲解和考察的是多线程以及消费者生产者问题，其中核心主要涉及到三个方面：Pthread介绍、Pthread创建多线程、互斥锁。
+
+Pth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统第四次上机教程——同步与互斥">
+<meta property="og:url" content="http://yoursite.com/2016/01/07/Linux-lab4/index.html">
+<meta property="og:site_name" content="yoyo">
+<meta property="og:description" content="@(学习资料)[OS, 多线程, 进程同步, 进程互斥, 生产者与消费者]
+
+理解Linux操作系统多线程以及多线程之间关于资源的同步与互斥
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了管道和共享内存进程间通信，并完成了相应的实验，本次实验主要讲解和考察的是多线程以及消费者生产者问题，其中核心主要涉及到三个方面：Pthread介绍、Pthread创建多线程、互斥锁。
+
+Pth">
+<meta property="og:updated_time" content="2016-01-07T10:16:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统第四次上机教程——同步与互斥">
+<meta name="twitter:description" content="@(学习资料)[OS, 多线程, 进程同步, 进程互斥, 生产者与消费者]
+
+理解Linux操作系统多线程以及多线程之间关于资源的同步与互斥
+
+岳友(yoyo9170@163.com)
+
+上节课我们主要介绍了管道和共享内存进程间通信，并完成了相应的实验，本次实验主要讲解和考察的是多线程以及消费者生产者问题，其中核心主要涉及到三个方面：Pthread介绍、Pthread创建多线程、互斥锁。
+
+Pth">
+  
+    <link rel="alternative" href="/atom.xml" title="yoyo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yoyo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">码农、程序员、未来的全栈攻城狮</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Linux-lab4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/07/Linux-lab4/" class="article-date">
+  <time datetime="2016-01-07T09:59:03.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      操作系统第四次上机教程——同步与互斥
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@(学习资料)[OS, 多线程, 进程同步, 进程互斥, 生产者与消费者]</p>
+<blockquote>
+<p>理解Linux操作系统多线程以及多线程之间关于资源的同步与互斥</p>
+<ul>
+<li>岳友(yoyo9170@163.com)</li>
+</ul>
+<p>上节课我们主要介绍了管道和共享内存进程间通信，并完成了相应的实验，本次实验主要讲解和考察的是多线程以及消费者生产者问题，其中核心主要涉及到三个方面：<strong>Pthread</strong>介绍、<strong>Pthread</strong>创建多线程、互斥锁。</p>
+</blockquote>
+<h3 id="Pthread_u7B80_u4ECB"><a href="#Pthread_u7B80_u4ECB" class="headerlink" title="Pthread简介"></a>Pthread简介</h3><p>   <code>pthread</code>表示 <code>POSIX Threads</code>，是一个标准，也是一个库。C 语言程序使用 <code>pthread</code> 需要引用 <code>pthread.h</code>头文件，并且在链接时指定参数 <code>-lpthread</code>。</p>
+<p>   <code>pthread</code> 可以创建多线程应用程序，线程类似于进程，但是线程是共享地址空间的，因此同一进程下的多个线程可以都访问和操作同一变量。因此需要开发者进行访问同步控制。</p>
+<ul>
+<li><strong>创建线程</strong><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#include &lt;pthread.h&gt;</span></span><br><span class="line"><span class="keyword">int</span> pthread_create(pthread_t *<span class="keyword">restrict</span> tidp,<span class="keyword">const</span> pthread_attr_t *<span class="keyword">restrict</span> attr,<span class="keyword">void</span> *(*start_rtn)(<span class="keyword">void</span>), <span class="keyword">void</span> *<span class="keyword">restrict</span> arg);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>该函数执行成功返回为0</p>
+<ul>
+<li>第一个参数为指向线程标识符的指针。</li>
+<li>第二个参数用来设置线程属性。</li>
+<li>第三个参数是线程运行函数的起始地址。</li>
+<li>最后一个参数是运行函数的参数。<br><em>其中说明，最后一个参数即为该线程的入口函数，创建了线程之后，新的线程会拥有自己的函数栈，但是全局数据和其他线程共享。因此，函数的局部变量是线程的私有数据，而函数之外的全局变量则是在所有线程之间共享的。</em></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>结束线程</strong><blockquote>
+<p>结束一个进程有许多种方法，线程可以调用<em>pthread_exit</em>退出，也可以直接从<em>start_routine</em>函数返回实现退出。此外，线程是附属于进程的，因此任何一个线程调用<em>exit</em>结束进程的时候，所有的线程都会退出。</p>
+</blockquote>
+</li>
+<li><p><strong>线程等待</strong></p>
+<blockquote>
+<p>调用函数<em>pthread_join</em>可以等待某个线程结束。</p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int <span class="function"><span class="title">pthread_join</span><span class="params">(pthread_t tid, void** ret)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>接受两个参数，第一个参数是要等待的线程的ID，第二个参数是线程的返回值，即退出状态。这个函数会阻塞当前线程，直到正在等待的线程退出才会继续运行。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="u4E92_u65A5_u9501"><a href="#u4E92_u65A5_u9501" class="headerlink" title="互斥锁"></a>互斥锁</h3><p>因为线程可以共享全局数据，多个线程对全局数据进行写入操作就需要同步，同步的典型做法是使用锁。<code>pthread</code>中的互斥锁的数据类型是<code>pthread_mutex_t</code>，表示同一时刻只有一个线程能够拥有这把锁，其他尝试获取这把锁的线程都需要等待。创建和销毁互斥锁的方法为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_mutex_t</span> mymutex = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(pthread_mutex_t *mutex, <span class="keyword">const</span> pthread_mutexattr_t *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destroy</span><span class="params">(pthread_mutex_t *mutex)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>首先需要使用宏<code>PTHREAD_MUTEX_INITIALIZER</code>类型的变量，然后使用<code>pthread_mutex_init</code>函数初始化，创建互斥锁的时候，可以将<code>attr</code>参数传入NULL使用默认设置。两个函数在执行成功的时候都返回0。</p>
+<p>获取锁和释放所使用下面的函数完成：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(pthread_mutex_t *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(pthread_mutex_t *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(pthread_mutex_t *mutex)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>其中，<code>pthread_mutex_lock</code>和<code>pthread_mutex_trylock</code>函数都会尝试获取互斥锁，它们的区别在于当锁已经被其他线程使用的时候，<code>pthread_mutex_lock</code>函数会阻塞，直到获取这把锁，而<code>pthread_mutex_trylock</code>则会直接返回一个非零值。</p>
+<h3 id="u591A_u7EBF_u7A0B_u793A_u4F8B"><a href="#u591A_u7EBF_u7A0B_u793A_u4F8B" class="headerlink" title="多线程示例"></a>多线程示例</h3><h4 id="u521B_u5EFA_u7EBF_u7A0B"><a href="#u521B_u5EFA_u7EBF_u7A0B" class="headerlink" title="创建线程"></a>创建线程</h4><ul>
+<li><p>编写pthread.c</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//pthread.c</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> tid;</span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">thread_fun</span><span class="params">(<span class="keyword">void</span> * name)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s: Hello world !\n"</span>,name); </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> err;</span><br><span class="line">	err = pthread_create(&amp;tid,<span class="literal">NULL</span>, thread_fun,<span class="string">"Child thread"</span>);</span><br><span class="line">	<span class="keyword">if</span>(err !=<span class="number">0</span>)&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"can't create thread!\n"</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>); </span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Main thread: Hello world!\n"</span>); </span><br><span class="line">	sleep(<span class="number">1</span> );</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译运行<br> <code>gcc pthread.c -o pthread -lpthread</code><br> <code>./pthread</code></p>
+</li>
+<li>将<code>return</code>语句前面的<code>sleep(1);</code>移到<code>thread_fun</code>中的<code>printf</code>之前,再次编译一遍,观察结果。对比上次实验 fork 实验中父子进程运行关系,有什么不同。为什么是这样?</li>
+</ul>
+<h4 id="u7EBF_u7A0B_u95F4_u7684_u8D44_u6E90_u5173_u7CFB"><a href="#u7EBF_u7A0B_u95F4_u7684_u8D44_u6E90_u5173_u7CFB" class="headerlink" title="线程间的资源关系"></a>线程间的资源关系</h4><ul>
+<li><p>编写pthread2.c</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span> </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> tid; </span><br><span class="line"><span class="keyword">int</span> share=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">thread_fun</span><span class="params">(<span class="keyword">void</span> * name)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s: Hello world !\n"</span>,name); </span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> s =<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>( i =<span class="number">0</span>;i &lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">	share = <span class="number">111</span>;</span><br><span class="line">	sleep( s);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s has slept %d seconds;share = %d\n"</span>,</span><br><span class="line">		name, i*s, share);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> err;</span><br><span class="line">	err = pthread_create(&amp;tid,<span class="literal">NULL</span>, thread_fun,<span class="string">"Child thread"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(err !=<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"can't create thread!\n"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Main thread: Hello world!\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">for</span>( i =<span class="number">0</span>;i &lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">		share = <span class="number">333</span>;</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Main thread: has slept %d seconds;share = %d\n"</span>,i,share);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译运行<br><code>gcc pthread2.c -o pthread2 -lpthread</code><br><code>./pthread2</code><br>@仔细观察主线程和子线程中 share 的输出值,是否是想要的结果?和上次 fork 实验那个中的 n 相比,有什么不同?为什么?</p>
+</li>
+</ul>
+<h3 id="u7EBF_u7A0B_u95F4_u4E92_u65A5"><a href="#u7EBF_u7A0B_u95F4_u4E92_u65A5" class="headerlink" title="线程间互斥"></a>线程间互斥</h3><ul>
+<li>为了防止上例中出现的问题,我们需要利用 pthread 库提供的互斥锁来达到这个目的。</li>
+<li><p>编写pthread3.c</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;pthread.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt; </span></span><br><span class="line"><span class="comment">#include &lt;unistd.h&gt; </span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt; </span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">pthread_t tid;</span><br><span class="line"><span class="keyword">int</span> share=<span class="number">0</span>;</span><br><span class="line">pthread_mutex_t share_mutex = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line">void *thread_fun(void * name)&#123;</span><br><span class="line">	<span class="keyword">printf</span>(<span class="string">"<span class="variable">%s</span>: Hello world !\n"</span>,name); </span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	<span class="keyword">int</span> <span class="keyword">s</span> =<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>( i =<span class="number">0</span>;i &lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">		pthread_mutex_lock(&amp;share_mutex);</span><br><span class="line">		share = <span class="number">111</span>;</span><br><span class="line">		<span class="keyword">sleep</span>( <span class="keyword">s</span>);</span><br><span class="line">		<span class="keyword">printf</span>(<span class="string">"<span class="variable">%s</span> has slept <span class="variable">%d</span> seconds; share =<span class="variable">%d</span>\n"</span>,</span><br><span class="line">			name,i*<span class="keyword">s</span>,share);</span><br><span class="line">		pthread_mutex_unlock(&amp;share_mutex); </span><br><span class="line">		<span class="keyword">return</span> NULL;</span><br><span class="line">｝</span><br><span class="line"><span class="keyword">int</span> main() &#123;</span><br><span class="line">	<span class="keyword">int</span> err;</span><br><span class="line">	err = pthread_create(&amp;tid,NULL, thread_fun,<span class="string">"Child thread"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(err !=<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">printf</span>(<span class="string">"can't create thread!\n"</span>);</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">printf</span>(<span class="string">"Main thread: Hello world!\n"</span>);</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>( i =<span class="number">0</span>;i &lt;<span class="number">1000</span>;i++)&#123;</span><br><span class="line">		pthread_mutex_lock(&amp;share_mutex); </span><br><span class="line">		share = <span class="number">333</span>;</span><br><span class="line">		<span class="keyword">sleep</span>(<span class="number">1</span> );</span><br><span class="line">		<span class="keyword">printf</span>(<span class="string">"Main thread: has slept <span class="variable">%d</span> seconds;</span><br><span class="line">			share = <span class="variable">%d</span>\n"</span>,i,share);</span><br><span class="line">		pthread_mutex_unlock(&amp;share_mutex);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br><span class="line">/*<span class="variable">@一</span>个线程可以调用 pthread_mutex_lock 获得 Mutex,如果这时另一个线程已经调 用 pthread_mutex_lock 获得了该 Mutex,则当前线程需要挂起等待,直到另一个线 程调用 pthread_mutex_unlock 释放 Mutex,当前线程被唤醒,才能获得该 Mutex 并 继续执行。*<span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译运行<br><code>gcc pthread3.c -o pthread3 -lpthread</code><br><code>./pthread3</code><br>@ 观察运行结果。主线程和次线程中的两个<code>sleep</code>调用分别放到 <code>pthread_mutex_unlock</code> 之后,再次编译运行,观察结果,思考第一次运行的结果为 何不对? 使用互斥量时应该注意什么问题?<br>@该示例还代码中还引入两个概念:临界区:主次线程中被 <code>pthread_mutex_lock</code> 和 <code>pthread_mutex_unlock</code> 函数保护起来的区域。临界资源:变量 <code>share</code>。请大家回忆 操作系统概念知识。临界资源、临界区、互斥量之间的关系。</p>
+</li>
+</ul>
+<h3 id="u6D88_u8D39_u8005_u751F_u4EA7_u8005_u95EE_u9898"><a href="#u6D88_u8D39_u8005_u751F_u4EA7_u8005_u95EE_u9898" class="headerlink" title="消费者生产者问题"></a>消费者生产者问题</h3><ul>
+<li>生产者与消费者模型中，要保证以下几点:<ul>
+<li>同一时间内只能有一个生产者生产</li>
+<li>同一时间内只能有一个消费者消费</li>
+<li>生产者生产的同时消费者不能消费</li>
+<li>消息队列满时生产者不能继续生产</li>
+<li>消息队列空时消费者不能继续消费</li>
+</ul>
+</li>
+<li>数据模型<ul>
+<li>仓库：warehouse [CAPABILITY];</li>
+<li>生产者：procuder();</li>
+<li>消费者：consumer();</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/01/07/Linux-lab4/" data-id="cij4488mt0005lhcsfaupey3s" class="article-share-link" data-share="baidu" data-title="操作系统第四次上机教程——同步与互斥">分享到</a>
+      
+
+      
+        <a href="http://yoursite.com/2016/01/07/Linux-lab4/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/07/linux-lab5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          操作系统第五次上机教程——可加载内核模块
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/07/Linux-lab3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">操作系统第三次上机教程——进程间通信</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/07/Linux-lab4/" data-title="操作系统第四次上机教程——同步与互斥" data-url="http://yoursite.com/2016/01/07/Linux-lab4/"></div>
+  </section>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/01/07/linux-lab6/">操作系统第六次上机教程——Proc文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/linux-lab5/">操作系统第五次上机教程——可加载内核模块</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/Linux-lab4/">操作系统第四次上机教程——同步与互斥</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/07/Linux-lab3/">操作系统第三次上机教程——进程间通信</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/06/Linux-lab1/">操作系统第一次上机教程——Linux基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xpddwn.github.io" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 xpddwn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xpddwn"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
